@@ -1,0 +1,48 @@
+<template name="components_get_all_LOC_req">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Letter of Credit Requests
+        <button type="button" id="btnViewDetails"  class="btn btn-info btn-deploy">Submit</button> 
+ 
+ 
+     <div class="panel-body">
+    <form class="form-horizontal">
+
+            <label for="bank_addr" class="col-sm-4 control-label">Bank Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="bank_addr" class="form-control" value="" placeholder="Bank Address" />
+            </div>
+    </form>
+    </div> 
+
+        <!-- <input type="file" id="quantity" class="form-control" value="" placeholder="Quantity" /> -->
+                
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Sale Agreement</td>
+                        <td>Seller Address</td>
+                        <td>Buyer Address</td>
+                        <td>Purchase Order</td>
+                        <td>LOC Status</td>
+                        <td>LOC Agreement</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getLocList}}
+                <tr>
+                        <td>{{sale_agreement}}</td>
+                        <td>{{seller_addr}}</td>
+                        <td>{{buyer_addr}}</td>
+                        <td>{{purchase_addr}}</td>
+                        <td>{{loc_status}}</td>
+                        <td>{{loc_hash}}</td>
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+        </div>
+        </div>
+</template>

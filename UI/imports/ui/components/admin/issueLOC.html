@@ -1,0 +1,95 @@
+<template name="components_approve_loc">
+    <div class="panel panel-default panel-dapp">
+	<div class="panel-heading">
+		Review & Issue Letter of Credit
+	</div>
+      <div class="panel-body">
+             {{#with TemplateVar.get 'state'}}
+                {{#if isError}}
+                    <div class="alert alert-warning">
+                        Approval failed due to "{{error}}".
+                    </div>
+                {{/if}}
+            
+                {{#if isMining}}
+                    <div class="alert alert-info">
+                       Approval In Progress...
+                        <span class="badge text-right">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </span>
+                    </div>
+                {{/if}}
+            
+                {{#if isMined}}
+                    <div class="alert alert-info">
+                        Approved!
+                    </div>
+            
+                  
+                {{/if}}
+
+            {{/with}} 
+
+	<div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+
+        <div class="form-group">
+            <label for="seller_addr" class="col-sm-4 control-label">Seller Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="seller_addr" class="form-control" value="" placeholder="Seller Node Address" />
+            </div>
+        </div> 
+
+                <div class="form-group">
+            <label for="buyer_addr" class="col-sm-4 control-label">Buyer Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="buyer_addr" class="form-control" value="" placeholder="Buyer Node Address" />
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <label for="adv_bank_addr" class="col-sm-4 control-label">Advising Bank Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="adv_bank_addr" class="form-control" value="" placeholder="Advising Bank address" />
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <label for="iss_bank_addr" class="col-sm-4 control-label">Issuing Bank Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="iss_bank_addr" class="form-control" value="" placeholder="Issuing Bank Address" />
+            </div>
+        </div> 
+
+                <div class="form-group">
+            <label for="sale_agreement_hash" class="col-sm-4 control-label">Sale Agreement</label>
+            <div class="col-sm-4">
+                <input type="text" id="sale_agreement_hash" class="form-control" value="" placeholder="Seller Agreement Hash" />
+            </div>
+        </div> 
+
+
+             <div class="form-group">
+            <label for="purchase_addr" class="col-sm-4 control-label">Purchase Order</label>
+            <div class="col-sm-4">
+                <input type="text" id="purchase_addr" class="form-control" value="" placeholder="Purchase address" />
+            </div>
+        </div> 
+
+            <label for="uploadfile" class="col-sm-4 control-label">Filename</label>
+            <input type="file" id="uploadfile" value="" placeholder="filename" />
+
+		<div class="form-group">
+			<div class="col-sm-5">
+    				<button type="button" id="btnApproveContract" style="position: relative;top: 10px;left: 80%;" class="btn btn-info btn-deploy">Submit
+			</button>
+    			</div>
+			
+    		</div>
+	</form>
+	</div>
+	</div>
+    </div>
+    </div>
+</template>

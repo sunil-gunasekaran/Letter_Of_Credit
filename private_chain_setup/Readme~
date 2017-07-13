@@ -1,0 +1,6 @@
+
+Steps
+=====
+1) Change the path according your needs and place the genesis file in the appropriate directory structure.
+ 
+Execute runethereumGenesis.sh

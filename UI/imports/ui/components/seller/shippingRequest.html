@@ -1,0 +1,78 @@
+<template name="components_shipping_req">
+    <div class="panel panel-default panel-dapp">
+	<div class="panel-heading">
+		Shipping Request
+	</div>
+      <div class="panel-body">
+             {{#with TemplateVar.get 'state'}}
+                {{#if isError}}
+                    <div class="alert alert-warning">
+                        Shipping request failed due to "{{error}}".
+                    </div>
+                {{/if}}
+            
+                {{#if isMining}}
+                    <div class="alert alert-info">
+                       Shipping request In Progress...
+                        <span class="badge text-right">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </span>
+                    </div>
+                {{/if}}
+            
+                {{#if isMined}}
+                    <div class="alert alert-info">
+                        Shipping request sent!
+                    </div>
+            
+                  
+                {{/if}}
+
+            {{/with}} 
+
+	<div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+
+        <div class="form-group">
+            <label for="seller_addr" class="col-sm-4 control-label">Seller Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="seller_addr" class="form-control" value="" placeholder="Seller Address" />
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <label for="bank_addr" class="col-sm-4 control-label">Bank Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="bank_addr" class="form-control" value="" placeholder="Bank Address" />
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <label for="carrier_addr" class="col-sm-4 control-label">Carrier Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="carrier_addr" class="form-control" value="" placeholder="Carrier Address" />
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <label for="loc_hash" class="col-sm-4 control-label">LOC Agreement</label>
+            <div class="col-sm-4">
+                <input type="text" id="loc_hash" class="form-control" value="" placeholder="LOC Hash" />
+            </div>
+        </div> 
+
+
+		<div class="form-group">
+			<div class="col-sm-5">
+    				<button type="button" id="btnApproveContract" style="position: relative;top: 10px;left: 80%;" class="btn btn-info btn-deploy">Submit
+			</button>
+    			</div>
+			
+    		</div>
+	</form>
+	</div>
+	</div>
+    </div>
+    </div>
+</template>

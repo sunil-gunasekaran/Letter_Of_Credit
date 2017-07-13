@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Letter of credit POC</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href="./app.css" rel='stylesheet' type='text/css'>
+<script src="./app.js"></script>
+</head>
+<body>
+<h2>Letter of credit using Blockchain</h2> 
+
+<br> 
+<br>
+<h4>Register Bank</h4>
+<table>
+<tr> <td>
+<label for="bank_name">Name of the Bank</label>
+</td>
+<td>
+<input type="text" name="bank_name" id="bank_name"><br>
+</td></tr> 
+<br> 
+<br>
+<tr> <td>
+<label for="bank_addr">Bank address</label> </td> <td>
+ <input type="text" min="0" name="bank_addr" id="bank_addr"><br>
+</td></tr> 
+ <br>
+ <br>
+<tr> <td>
+<input type="submit" onclick="registerBank()" name="submit" value="Register" /> </td></tr> 
+</table>
+<br>
+<br>
+
+<h4>List of Available banks</h4>
+<br>
+<input type="submit" onclick="loadBanks()" name="submit" value="Bank_Details" />
+<br>
+<div id="mytable">
+</div>
+
+<br>
+<br>
+<br>
+
+<h4>IPFS Upload test</h4>
+<table>
+<tr> <td>
+<label for="file_name">File name with full path</label>
+</td>
+<td>
+<input type="text" name="file_name" id="file_name"><br>
+</td></tr> 
+<tr> <td>
+<input type="submit" onclick="upload()" name="submit" value="upload" /> </td></tr> 
+</td></tr> 
+</table>
+<br>
+
+
+<br> 
+<br>
+<h4>Register Buyer</h4>
+<table>
+<tr> <td>
+<label for="buyer_name">Name of the Buyer</label>
+</td>
+<td>
+<input type="text" name="buyer_name" id="buyer_name"><br>
+</td></tr> 
+<br> 
+<br>
+<tr> <td>
+<label for="seller_addr">Buyer address</label> </td> <td>
+ <input type="text" min="0" name="buyer_addr" id="buyer_addr"><br>
+</td></tr> 
+
+
+<tr> <td>
+<label for="bank_addr">Associated Bank address</label> </td> <td>
+ <input type="text" min="0" name="bank_addr" id="bank_addr"><br>
+</td></tr> 
+ <br>
+ <br>
+
+
+<tr> <td>
+<input type="submit" onclick="registerBuyer()" name="submit" value="Register" /> </td></tr> 
+</table>
+<br>
+<br>
+
+
+<br> 
+<br>
+<h4>Register Seller</h4>
+<table>
+<tr> <td>
+<label for="seller_name">Name of the Seller</label>
+</td>
+<td>
+<input type="text" name="seller_name" id="seller_name"><br>
+</td></tr> 
+<br> 
+<br>
+<tr> <td>
+<label for="seller_addr">Seller address</label> </td> <td>
+ <input type="text" min="0" name="seller_addr" id="seller_addr"><br>
+</td></tr> 
+
+<tr> <td>
+<label for="bank_addr">Associated Bank address</label> </td> <td>
+ <input type="text" min="0" name="bank_addr" id="bank_addr"><br>
+</td></tr> 
+ <br>
+ <br>
+<tr> <td>
+<input type="submit" onclick="registerSeller()" name="submit" value="Register" /> </td></tr> 
+</table>
+<br>
+<br>
+
+
+<br> 
+<br>
+<h4>Register Carrier</h4>
+<table>
+<tr> <td>
+<label for="seller_name">Name of the Carrier</label>
+</td>
+<td>
+<input type="text" name="carrier_name" id="carrier_name"><br>
+</td></tr> 
+<br> 
+<br>
+<tr> <td>
+<label for="bank_addr">Carrier address</label> </td> <td>
+ <input type="text" min="0" name="carrier_addr" id="carrier_addr"><br>
+</td></tr> 
+ <br>
+ <br>
+<tr> <td>
+<input type="submit" onclick="registerCarrier()" name="submit" value="Register" /> </td></tr> 
+</table>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h3>Contribute to the Project</h3>
+<br>
+<table>
+<tr>
+<td>
+ <label for="proj_contribute">Enter the project addres</label>
+</td>
+<td>
+ <input type="text" name="project_address" id="project_address">
+</td></tr>
+<tr>
+<td>
+ <label for="proj_funding">Contribution amount in Ether</label> 
+</td>
+<td>
+ <input type="number" min="0" name="contrib_fund" id ="contrib_fund">
+</td>
+</tr>
+
+</table>
+<br>
+<table>
+<tr><td>
+ <input type="submit" onclick="contribute()" name="contrib" value="Contribute" />
+</td></tr>
+</table>
+<script type="text/javascript">
+		calendar.set("deadline")
+</script>
+</body>
+</html>

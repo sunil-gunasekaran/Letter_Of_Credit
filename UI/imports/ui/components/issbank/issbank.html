@@ -1,0 +1,61 @@
+<template name="components_issuing_bank">
+    <div class="panel panel-default panel-dapp">
+	<div class="panel-heading">
+		Register Issuing Bank
+	</div>
+      <div class="panel-body">
+             {{#with TemplateVar.get 'state'}}
+                {{#if isError}}
+                    <div class="alert alert-warning">
+                        Registration failed due to "{{error}}".
+                    </div>
+                {{/if}}
+            
+                {{#if isMining}}
+                    <div class="alert alert-info">
+                       Registration In Progress...
+                        <span class="badge text-right">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </span>
+                    </div>
+                {{/if}}
+            
+                {{#if isMined}}
+                    <div class="alert alert-info">
+                        You have successfully registered!
+                    </div>
+            
+                  
+                {{/if}}
+
+            {{/with}} 
+
+	<div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+            <label for="bank_name" class="col-sm-4 control-label">Issuing Bank Name</label>
+            <div class="col-sm-4">
+                <input type="text" id="bank_name" class="form-control" value="" placeholder="Name of Issuing Bank" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bank_addr" class="col-sm-4 control-label">Bank Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="bank_addr" class="form-control" value="" placeholder="Bank Node Address" />
+            </div>
+        </div> 
+		<div class="form-group">
+			<div class="col-sm-5">
+    				<button type="button" id="btnIssBankContract" style="position: relative;top: 10px;left: 80%;" class="btn btn-info btn-deploy">Register
+			</button>
+    			</div>
+			
+    		</div>
+	</form>
+	</div>
+	</div>
+    </div>
+    </div>
+</template>

@@ -1,0 +1,4 @@
+truffle compile
+rm -rf ./build
+truffle migrate --network staging
+truffle build && nodejs build/node/server.js

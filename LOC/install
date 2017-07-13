@@ -1,0 +1,7 @@
+sudo -E npm install multer
+sudo -E npm install path 
+sudo -E npm install mime 
+sudo -E npm install fs
+sudo -E npm install util
+sudo -E npm install config 
+ 

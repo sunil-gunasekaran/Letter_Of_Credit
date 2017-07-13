@@ -1,0 +1,11 @@
+{
+    "name": "nodejs-testing",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "web3": "Found here https://www.npmjs.com/package/web3",
+        "web3": "0.18.2",
+        "ethereumjs-util": "5.1.1",
+        "truffle-contract": "1.1.10"
+    }
+}

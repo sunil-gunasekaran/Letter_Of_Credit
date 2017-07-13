@@ -1,0 +1,49 @@
+<template name="components_get_shipping_req">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Review Shipping Requests
+        <button type="button" id="btnViewDetails"  class="btn btn-info btn-deploy">Submit</button> 
+     <div class="panel-body">
+    <form class="form-horizontal">
+
+
+         <div class="form-group">
+            <label for="carrier_addr" class="col-sm-4 control-label">Carrier Address</label>
+            <div class="col-sm-4">
+               <input type="text" id="carrier_addr" class="form-control" value="" placeholder="Carrier Address" />
+            </div>
+        </div> 
+
+    </form>
+    </div> 
+
+        <!-- <input type="file" id="quantity" class="form-control" value="" placeholder="Quantity" /> -->
+                
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>LOC Agreement</td>
+                        <td>Seller Address</td>
+                        <td>Bank Address</td>
+                        <td>Shipment Status</td>
+                        <td>Bill of Lading</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getLocList}}
+                <tr>
+                        <td>{{loc_hash}}</td>
+                        <td>{{seller_addr}}</td>
+                        <td>{{bank_addr}}</td>
+                        <td>{{status}}</td>
+                        <td>{{bill}}</td>
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+
+        </div>
+        </div>
+</template>

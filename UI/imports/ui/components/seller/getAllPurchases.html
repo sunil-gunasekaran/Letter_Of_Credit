@@ -1,0 +1,55 @@
+<template name="components_all_purchase_detail">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Review Purchase Orders
+        <button type="button" id="btnViewDetails"  class="btn btn-info btn-deploy">Submit</button> 
+ 
+     <div class="panel-body">
+    <form class="form-horizontal">
+
+            <div class="form-group">
+            <label for="seller_addr" class="col-sm-6 control-label">Seller Address</label>
+            <div class="col-sm-4">
+                <input type="text" id="seller_addr" class="form-control" value="" placeholder="Seller Address" />
+            </div>
+        </div>
+
+    </form>
+    </div> 
+
+                
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                       <td>Purchase Order</td>
+                       <td>Buyer name</td>
+                        <td>Buyer address</td>
+                        <td>Product</td>
+                        <td>Quantity</td>
+                        <td>Cost</td>
+                        <td>Order Status</td>
+                        <td>Sale Agreement</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getPurchaseList}}
+                <tr>
+                        <td>{{purchase_addr}}</td>
+                        <td>{{buyer_name}}</td>
+                        <td>{{buyer_address}}</td>
+                        <td>{{product}}</td>
+                        <td>{{quantity}}</td>
+                        <td>{{cost}}</td>
+                        <td>{{order_accepted}}</td>
+                        <td>{{file_hash}}</td>
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+
+        </div>
+        </div>
+</template>
+    

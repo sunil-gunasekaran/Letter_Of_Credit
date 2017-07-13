@@ -1,0 +1,42 @@
+<template name="components_get_my_iss_LOC_req">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Review Letter of Credit Applications
+        <button type="button" id="btnViewDetails"  class="btn btn-info btn-deploy">Submit</button> 
+     <div class="panel-body">
+    <form class="form-horizontal">
+
+          <div class="form-group">
+            <label for="seller_addr" class="col-sm-4 control-label">Seller address</label>
+            <div class="col-sm-3">
+                <input type="text" id="seller_addr" class="form-control" value="" placeholder="Seller address" />
+            </div>
+        </div> 
+
+    </form>
+    </div> 
+
+        <!-- <input type="file" id="quantity" class="form-control" value="" placeholder="Quantity" /> -->
+                
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Purchase Order</td>
+                        <td>LOC Agreement</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getLocList}}
+                <tr>
+                        <td>{{purchase_addr}}</td>
+                        <td>{{loc_hash}}</td>
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+
+        </div>
+        </div>
+</template>

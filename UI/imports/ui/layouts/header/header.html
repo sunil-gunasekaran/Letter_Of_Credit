@@ -1,0 +1,47 @@
+<template name="header">
+<style>
+.navbar-default {
+    background-color: #2980b9;
+    border-color:#2980b9
+}
+
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+</style>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/" style="font-weight:800">
+					Letter of Credit Application using Blockchain                </a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{{pathFor 'App.view4'}}" style="color: #ffffff;">
+                       Buyer
+                    </a>
+                </li>
+				<li>
+                    <a href="{{pathFor 'App.view1'}}" style="color: #ffffff;">
+					   Advisory Bank                    </a>
+                </li>
+                <li>
+                    <a href="{{pathFor 'App.view3'}}" style="color: #ffffff;">
+                       Seller
+                    </a>
+                </li>
+				<li>
+                    <a href="{{pathFor 'App.view2'}}" style="color: #ffffff;">
+                       Issuing Bank
+                    </a>
+                </li>
+                <li>
+                    <a href="{{pathFor 'App.view5'}}" style="color: #ffffff;">
+                       Carrier
+                    </a>
+                </li>
+			</ul>
+		</div>
+	</nav>
+</template>

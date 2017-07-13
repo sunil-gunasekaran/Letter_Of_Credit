@@ -1,0 +1,92 @@
+<template name="components_all_sellers">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Seller Details
+        </div>
+        <div class="panel-body">
+              
+         <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Seller name</td>
+                        <td>Seller address</td>
+                        <td>Product</td>
+                        <td>Cost</td>
+                        <td>Issuing Bank address</td>
+
+       
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getSellersList}}
+               
+                <tr>
+                        <td>{{seller_name}}</td>
+                        <td>{{seller_addr}}</td>
+                        <td>{{seller_product}}</td>
+                        <td>{{seller_cost}}</td>
+                        <td>{{seller_bank_addr}}</td>
+
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+
+        </div>
+       
+       <!-- <div class="row">
+            <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <button type="button" id="btnBuyersList" style="position: relative;top: 10px;left: 80%;" class="btn btn-info  btn-deploy">View Buyers List
+                         </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        {{#with TemplateVar.get 'showBuyers'}}
+        {{#if show}}
+        <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Buyers 
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Buyer</td>
+                        <td>No Of Bonds</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getBuyersList}}
+               
+                <tr>
+                        <td>{{Buyer}}</td>
+                        <td>{{BondCount}}</td>
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <button type="button" id="makePayment" style="position: relative;top: 10px;left: 80%;" class="btn btn-info  btn-deploy">Make Payments
+                         </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        {{/if}}
+        {{/with}}-->
+        </div>
+     </div>
+</template>
