@@ -1,0 +1,41 @@
+<template name="components_get_iss_BOL_req">
+    <div class="panel panel-default panel-dapp">
+        <div class="panel-heading">
+           Review Bill of Lading details
+        <button type="button" id="btnViewDetails"  class="btn btn-info btn-deploy">Submit</button> 
+     <div class="panel-body">
+    <form class="form-horizontal">
+
+        <div class="form-group">
+            <label for="bank_addr" class="col-sm-4 control-label">Bank Address</label>
+            <div class="col-sm-3">
+                <input type="text" id="bank_addr" class="form-control" value="" placeholder="Bank Address" />
+            </div>
+        </div> 
+    </form>
+    </div> 
+
+        <!-- <input type="file" id="quantity" class="form-control" value="" placeholder="Quantity" /> -->
+                
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>LOC Agreement</td>
+                        <td>Bill of Lading</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#each getLocList}}
+                <tr>
+                        <td>{{loc_hash}}</td>
+                        <td>{{bill}}</td>
+                </tr>
+                {{/each}}
+               </tbody>
+            </table>
+
+        </div>
+        </div>
+</template>
