@@ -15,10 +15,11 @@ Template['components_req_LOC'].events({
     var sellerAddress    = template.find("#seller_addr").value;
     var buyeraddress     = template.find("#buyer_addr").value;
     var bankaddress      = template.find("#bank_addr").value;
+    var issbankaddress      = template.find("#issbank_addr").value;
     var filehash         = template.find("#sale_agreement_hash").value;
     var purchaseaddress      = template.find("#purchase_addr").value;
 
-    var data = {seller_addr:sellerAddress,buyer_addr:buyeraddress,filehash:filehash,bank_addr:bankaddress,purchase_addr:purchaseaddress}
+    var data = {seller_addr:sellerAddress,buyer_addr:buyeraddress,filehash:filehash,bank_addr:bankaddress,purchase_addr:purchaseaddress,issbank_addr:issbankaddress}
 
     Meteor.call('requestLOC','http://localhost:8888/requestLOC',data,function(error, result){
     if (result)

@@ -9,18 +9,18 @@ pragma solidity ^0.4.11;
 contract CarrierRegistry  {
 
 struct  CarrierInformation {
-		string carrier_name;
+		string  carrier_name;
 		address carrier_address;
 		address bank_address;
 	}
 CarrierInformation carrierInfo;
 
 struct  ShippingRequests {
-		string LOCHash;
+		string  LOCHash;
 		address seller_addr;
 		address bank_addr;
-		bool status;
-		string bill;
+		bool    status;
+		string  bill;
 	}
 ShippingRequests[50] shipRequest;
 
@@ -80,8 +80,6 @@ function approve (string LOCHash, string billOfLadingHash) {
 		shipRequest[index].bill         = billOfLadingHash;
 	}
 }
-
-
 
 function() {
     throw;

@@ -32,6 +32,14 @@ address[50] purchasContractAddr;
 
 mapping(address => address[50]) map_buyer_PO;
 
+struct receivedBOL {
+	string LOCHash;
+	string BOLHash;
+}
+receivedBOL[50] BOL;
+uint BOLCounter = 0;
+
+
 struct receivedLOC {
 	string LOCHash;
 	address seller_address;
@@ -98,6 +106,22 @@ function getLOCCounter() returns (uint) {
 function getLOC(uint index) returns (string,address,address) {
 	return (sLOC[index].LOCHash,sLOC[index].seller_address,sLOC[index].purchase_address);
 }
+
+function getBOLCounter() returns (uint) {
+	return BOLCounter;
+}
+
+function getBOL(uint index) returns (string,string) {
+	return (BOL[index].LOCHash,BOL[index].BOLHash);
+}
+
+function shareBOL(string LOCHash, string BOLHash) {
+
+	BOL[BOLCounter].LOCHash = LOCHash;
+	BOL[BOLCounter].BOLHash = BOLHash;
+	BOLCounter ++;
+}
+
 
 function() {
     throw;

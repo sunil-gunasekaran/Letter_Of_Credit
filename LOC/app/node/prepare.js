@@ -826,6 +826,8 @@ app.post('/requestLOC',jsonparser,function(req,res) {
     var buyer_addr       = req.body.buyer_addr;
     var filehash         = req.body.filehash;
     var bank_addr        = req.body.bank_addr;
+    var issbank_addr     = req.body.issbank_addr;
+
     var purchase_addr    = req.body.purchase_addr;
 
     console.log("seller_addr:"+seller_addr);
@@ -833,6 +835,7 @@ app.post('/requestLOC',jsonparser,function(req,res) {
     console.log("filehash:"+filehash);
     console.log("bank_addr:"+bank_addr);
     console.log("purchase_addr:"+purchase_addr);
+    console.log("issbank_addr:"+issbank_addr);
 
     web3.eth.getAccountsPromise()
                             .then(accounts => Gov.deployed()
@@ -848,6 +851,7 @@ app.post('/requestLOC',jsonparser,function(req,res) {
                                                                         seller_addr,
                                                                         buyer_addr,
                                                                         bank_addr,
+                                                                        issbank_addr,
                                                                         bank_contract_addr,
                                                                         purchase_addr,
                                                                         {from: buyer_addr,gas:97000000}) //3 and end 3
@@ -904,10 +908,10 @@ app.post('/getMyLocStatus',jsonparser,function(req,res) {
                                                   .then (out => {   
 
                         details = {
-                                                  sale_agreement : out[0],
-                                                //  seller_addr    : out[1],
-                                                //  buyer_addr : out[2],
-                                                  //bank_addr       : out[3],
+                                                 sale_agreement : out[0],
+                                                  buyer_addr    : out[2],
+                                                  seller_addr : out[1],
+                                                  issbank_addr       : out[3],
                                                   purchase_addr       : out[4],
                                                   loc_status      : out[5],
                                                   loc_hash          : out[6]
@@ -973,12 +977,12 @@ app.post('/getAllLocReq',jsonparser,function(req,res) {
                                             var x =0; 
                                             instance.getLocStatusByIndex(i).then (out => {  
 
- 
+
                                               details = {
                                                   sale_agreement : out[0],
-                                                  seller_addr    : out[1],
-                                                  buyer_addr : out[2],
-                                                  //bank_addr       : out[3],
+                                                  buyer_addr    : out[2],
+                                                  seller_addr : out[1],
+                                                  issbank_addr       : out[3],
                                                   purchase_addr       : out[4],
                                                   loc_status      : out[5],
                                                   loc_hash          : out[6]
@@ -989,8 +993,6 @@ app.post('/getAllLocReq',jsonparser,function(req,res) {
                                                   else {
                                                     details.loc_status="Issued";
                                                   }
-
-
 
                                             DataArr.push(details);
                                                   x++;
@@ -1073,7 +1075,7 @@ app.post('/issueLOC',jsonparser,function(req,res) {
                                                                                                                    iss_bank_contract_addr,
                                                                                                                    adv_bank_contract_addr,
                                                                                                                    purchase_addr,
-                                                                                                                   {from: iss_bank_addr,gas:97000000}) //3 and end 3 //3 and end 3
+                                                                                                                   {from: adv_bank_addr,gas:97000000}) //3 and end 3 //3 and end 3
                                                                           .then(txHash => {console.log(txHash);res.end();}); // 4 and end 4
                                                                         
                                                                            console.log(sale_agreement);    
@@ -1218,6 +1220,7 @@ app.post('/shareLOCwithSender',jsonparser,function(req,res) {
 /***********************************************************
       Method name : Get shareLOCWithSeller
 ************************************************************/
+/*
 app.post('/shareLOCwithSender',jsonparser,function(req,res) {
 
       var seller_addr      = req.body.seller_addr;
@@ -1247,7 +1250,7 @@ app.post('/shareLOCwithSender',jsonparser,function(req,res) {
                                                   }) //end 2
                     ))
 });
-
+*/
 
 /***********************************************************
       Method name : retriveLOCForSeller
@@ -1272,7 +1275,7 @@ app.post('/retriveLOCForSeller',jsonparser,function(req,res) {
 
                 Sell.at(contract_addr).then(inst => inst.getLOC.call(0).then(result=> {
                           details = {
-                                        purchase_addr: result[1],
+                                        purchase_addr: result[2],
                                         loc_hash: result[0],
                                      
                                      };
@@ -1366,7 +1369,7 @@ app.post('/retriveShippingDetails',jsonparser,function(req,res) {
       var DataArr = new Array();
       var details;
 
-    web3.eth.getAccountsPromise()
+      web3.eth.getAccountsPromise()
                             .then(accounts => ShipExec.deployed()
                             .then(instance => instance.getCarrierContractAddr.call(carrier_addr)
                             .then(contract_addr => { 
@@ -1381,6 +1384,14 @@ app.post('/retriveShippingDetails',jsonparser,function(req,res) {
                                         status: result[3],
                                         bill: result[4],
                                      };
+
+                                              if (!details.status) {
+                                                    details.status="Not Shipped";
+                                                  }
+                                                  else {
+                                                    details.status="Shippment Completed";
+                                                  }
+
                                         DataArr.push(details);
                                         console.log(DataArr);
                                         res.write(JSON.stringify(DataArr));
@@ -1397,14 +1408,13 @@ var __dirname = "/home/blockchain/tmp/";
 app.post('/approveShipping',jsonparser,function(req,res) {
 
     console.log("Start approve shipping");
-    var loc_hash      = req.body.loc_hash;
+    var loc_hash          = req.body.loc_hash;
     var carrier_addr      = req.body.carrier_addr;
 
     var filename      = req.body.uploadfile;
     var filehash;
 
     /* Approve request process */
-    console.log("loc_hash:"+loc_hash);
     console.log("filename"+filename);
 
     ipfs.util.addFromFs(path.join(__dirname,filename),(err, result)=>{
@@ -1416,19 +1426,223 @@ app.post('/approveShipping',jsonparser,function(req,res) {
       
           console.log("successfully uploaded the file to IPFS"); 
           fileHash = result[0].hash;
+          console.log("loc_hash:"+loc_hash);
           console.log("Hash value of the file = " + fileHash ); 
+          console.log("carrier_addr = " + carrier_addr ); 
 
           web3.eth.getAccountsPromise()
-                              .then(accounts => ShipExec.deployed()
-                              .then(instance => instance
-                              .getCarrierContractAddr.call(carrier_addr)
-                              .then(result => { console.log(result);
-          Car.at(result).then(inst => inst.approve.sendTransaction(loc_hash,
-                                                                   filehash,
-                                                                  {from: carrier_addr,gas:97000000})
-                              .then(txHash => {res.end();}))
-                                                  })
-                    ));
-          })
-         console.log("End approve Shipping");
+                            .then(accounts => ShipExec.deployed()
+                            .then(instance => { instance.getCarrierContractAddr.call(carrier_addr)
+                            .then(contract_addr => { Car.at(contract_addr)
+                            .then(inst => { inst.approve.sendTransaction(loc_hash,
+                                                                       fileHash,
+                                                                       {from: carrier_addr,gas:97000000})
+                            .then(txHash => {console.log(txHash);res.end();})})
+                                    console.log(contract_addr);})
+                                }))
     });
+});  
+
+
+/***********************************************************
+      Method name : Get shareLOCWithSeller
+************************************************************/
+app.post('/shareBillWithSellerandBank',jsonparser,function(req,res) {
+
+      var seller_addr       = req.body.seller_addr;
+      var issbank_addr      = req.body.bank_addr;
+      var loc_hash          = req.body.loc_hash;
+      var carrier_addr      = req.body.carrier_addr;
+      var bill_hash              = req.body.bill_hash;;
+      console.log("Start - Share Bill of Lading information with Issuing Bank and Seller");
+      console.log("Seller Address:"+seller_addr);
+      console.log("Issuing Bank Address:"+issbank_addr);
+      console.log("LOC Hash:"+loc_hash);
+
+      web3.eth.getAccountsPromise()
+                            .then(accounts => Gov.deployed()
+                            .then(instance => { instance.getSellerContractAddr.call(seller_addr)
+                            .then(contract_addr => { 
+                                                      console.log("Seller Contract address : "+contract_addr);
+                            
+                            if (contract_addr!='0x0000000000000000000000000000000000000000') {
+                                console.log("hello"+contract_addr);
+                                  Sell.at(contract_addr).then(inst => inst.shareBOL.sendTransaction(loc_hash,
+                                                                       bill_hash,
+                                                                       {from: carrier_addr,gas:97000000}).then(txHash => {
+                                                                                                                            console.log("Seller Txn Hash:"+txHash);
+                                                                                                                          })
+                                      )
+                                } // End If
+       
+      web3.eth.getAccountsPromise()
+                            .then(accounts => Gov.deployed()
+                            .then(instance => instance.getIssBankContractAddr.call(issbank_addr)
+                            .then(contract_addr => { 
+                                                      console.log("Bank Contract address : "+contract_addr);
+                            
+                            if (contract_addr!='0x0000000000000000000000000000000000000000') {
+
+                                  IssBank.at(contract_addr).then(inst => inst.shareBOL.sendTransaction(loc_hash,
+                                                                       bill_hash,
+                                                                       {from: carrier_addr,gas:97000000}).then(txHash => {
+                                                                                                                            console.log("Issuing Bank Txn Hash:"+txHash);
+                                                                                                                            res.end();
+                                                                                                                          })
+                                      )
+                                } // End If
+                              }))); // End of Issuing Bank send
+                              
+                              })
+
+      console.log("End - Share Bill of Lading information with Issuing Bank and Seller");
+
+                              })); // End of Seller send
+
+    });
+
+/***********************************************************
+      Method name : retriveSellerBOLetails
+************************************************************/
+app.post('/retriveSellerBOLetails',jsonparser,function(req,res) {
+
+      res.setHeader('Content-type','application/json');
+      console.log("Start retriveShippingDetails");
+      var seller_addr   = req.body.seller_addr;
+
+      var DataArr = new Array();
+      var details;
+
+      web3.eth.getAccountsPromise()
+                            .then(accounts => Gov.deployed()
+                            .then(instance => instance.getSellerContractAddr.call(seller_addr)
+                            .then(contract_addr => { 
+                                                      console.log("***"+contract_addr);
+                                                      if (contract_addr=='0x0000000000000000000000000000000000000000') 
+                                                          res.send();
+                Sell.at(contract_addr).then(inst => inst.getBOL.call(0).then(result=> {
+                          details = {
+                                        loc_hash: result[0],
+                                        bill: result[1],
+                                     };
+
+                                        DataArr.push(details);
+                                        console.log(DataArr);
+                                        res.write(JSON.stringify(DataArr));
+                                        res.send();
+                                }));
+                                                   }
+                              )));
+});  
+
+
+/***********************************************************
+      Method name : retriveIssBOLetails
+************************************************************/
+app.post('/retriveIssBOLetails',jsonparser,function(req,res) {
+
+      res.setHeader('Content-type','application/json');
+      console.log("Start retriveShippingDetails");
+      var bank_addr   = req.body.bank_addr;
+
+      var DataArr = new Array();
+      var details;
+
+      web3.eth.getAccountsPromise()
+                            .then(accounts => Gov.deployed()
+                            .then(instance => instance.getIssBankContractAddr.call(bank_addr)
+                            .then(contract_addr => { 
+                                                      console.log("***"+contract_addr);
+                                                      if (contract_addr=='0x0000000000000000000000000000000000000000') 
+                                                          res.send();
+                IssBank.at(contract_addr).then(inst => inst.getBOL.call(0).then(result=> {
+                          details = {
+                                        loc_hash: result[0],
+                                        bill: result[1],
+                                     };
+
+                                        DataArr.push(details);
+                                        console.log(DataArr);
+                                        res.write(JSON.stringify(DataArr));
+                                        res.send();
+                                }));
+                                                   }
+                              )));
+});  
+
+
+/***********************************************************
+      Method name : Get shareLOCWithSeller
+************************************************************/
+app.post('/shareBOLwithAdvisingBank',jsonparser,function(req,res) {
+
+      console.log("Start - Share Bill of Lading information with Advising Bank");
+
+      var advbank_addr      = req.body.advbank_addr;
+      var issbank_addr      = req.body.issbank_addr;
+      var loc_hash          = req.body.loc_hash;
+      var bill_hash         = req.body.bol_hash;;
+      
+      console.log("Advising Bank Address:"+advbank_addr);
+      console.log("Issuing Bank Address:"+issbank_addr);
+      console.log("LOC Agreementr:"+loc_hash);
+      console.log("BOL Agreement:"+bill_hash);
+
+       
+      web3.eth.getAccountsPromise()
+                            .then(accounts => Gov.deployed()
+                            .then(instance => instance.getAdvBankContractAddr.call(advbank_addr)
+                            .then(contract_addr => { 
+                                                      console.log("Advising Bank Contract address : "+contract_addr);
+                            
+                            if (contract_addr!='0x0000000000000000000000000000000000000000') {
+
+                                  AdvBank.at(contract_addr).then(inst => inst.shareBOL.sendTransaction(loc_hash,
+                                                                       bill_hash,
+                                                                       {from: issbank_addr,gas:97000000}).then(txHash => {
+                                                                                                                            console.log("Issuing Bank Txn Hash:"+txHash);
+                                                                                                                            res.end();
+                                                                                                                          })
+                                      )
+                                }
+                              })));
+      console.log("End - Share Bill of Lading information with Advising Bank");
+});
+
+
+/***********************************************************
+      Method name : Get Advising Bank's Bill of Lading requessts
+************************************************************/
+app.post('/getAdvBOLrequests',jsonparser,function(req,res) {
+
+      res.setHeader('Content-type','application/json');
+      console.log("Start Get Bill of Lading details for Advising Bank.");
+      var bank_addr   = req.body.bank_addr;
+
+      var DataArr = new Array();
+      var details;
+
+      web3.eth.getAccountsPromise()
+                            .then(accounts => Gov.deployed()
+                            .then(instance => instance.getAdvBankContractAddr.call(bank_addr)
+                            .then(contract_addr => { 
+                                                      console.log("***"+contract_addr);
+                                                      if (contract_addr=='0x0000000000000000000000000000000000000000') 
+                                                          res.send();
+                AdvBank.at(contract_addr).then(inst => inst.getBOL.call(0).then(result=> {
+                          details = {
+                                        loc_hash: result[0],
+                                        bill: result[1],
+                                     };
+
+                                        DataArr.push(details);
+                                        console.log(DataArr);
+                                        res.write(JSON.stringify(DataArr));
+                                        res.send();
+                                }));
+                                                   }
+                              )));
+      console.log("Start Get Bill of Lading details for Advising Bank.");
+
+});
+

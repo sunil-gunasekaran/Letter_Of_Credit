@@ -12,12 +12,14 @@ Template['components_approve_shipping'].events({
 	TemplateVar.set(template,'state', {isMining: true});
 	
 	var LOCHash = template.find("#loc_hash").value;
+	var carrierAddress = template.find("#carrier_addr").value;
+
 	var filename   = template.find("#uploadfile").files[0].name;
 
 	var reader = new FileReader();
 	reader.onload = function(event){          
     var filedata = new Uint8Array(reader.result);
-    var data = {loc_hash:LOCHash,uploadfile:filename}
+    var data = {loc_hash:LOCHash,uploadfile:filename,carrier_addr:carrierAddress}
    	 
    	console.log(filename);
     Meteor.call('approveShipping','http://localhost:8888/approveShipping',data,filedata,function(error, result){

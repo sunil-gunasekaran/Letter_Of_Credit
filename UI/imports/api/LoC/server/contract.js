@@ -293,6 +293,21 @@ Meteor.methods({
   return result;
 },
 
+"shareBOLwithAdvisingBank": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result;
+},
+
+
 "retriveLOCForSeller": function(url,params) { 
 
   var asyncFunc  = Meteor.wrapAsync( HTTP.post )
@@ -351,6 +366,92 @@ Meteor.methods({
     content: input
    });
   return result.data;
+},
+
+"shareBillWithSellerandBank": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result;
+},
+
+"shareBOLwithBank": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result;
+},
+
+"getBOLrequests": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result.data;
+},
+
+"getAdvBOLrequests": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result.data;
+},
+
+
+"retriveSellerBOLetails": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result.data;
+},
+
+"retriveIssBOLetails": function(url,params) { 
+
+  var asyncFunc  = Meteor.wrapAsync( HTTP.post )
+  var input = JSON.stringify(params);
+  var result = asyncFunc( url,
+  {
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    content: input
+   });
+  return result.data;
 }
+
 
 });

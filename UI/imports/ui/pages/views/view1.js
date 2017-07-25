@@ -15,7 +15,7 @@ import '../../components/admin/admin.js';
 import '../../components/admin/allAdvBanks.js';
 import '../../components/admin/getAllLocRequests.js';
 import '../../components/admin/issueLOC.js';
-
+import '../../components/admin/getAdvisingBankBOLRequests.js';
 
 //import '../../components/admin/admin_list.js';
 

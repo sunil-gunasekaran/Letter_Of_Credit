@@ -15,7 +15,8 @@ import '../../components/issbank/issbank.js';
 import '../../components/issbank/allIssBanks.js';
 import '../../components/issbank/getIssLocRequests.js';
 import '../../components/issbank/shareLOCwithSender.js';
-
+import '../../components/issbank/getBOLRequests.js';
+import '../../components/issbank/shareBOLwithBank.js';
 
 
 //import '../../components/admin/admin_list.js';

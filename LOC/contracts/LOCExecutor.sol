@@ -15,6 +15,7 @@ contract LOCExecutor {
                            address seller_addr,
                            address buyer_addr,
                            address adv_bank_addr,
+                           address iss_bank_addr,
                            address adv_bank_contract_addr,
                            address purchase_addr)  {
 
@@ -22,6 +23,7 @@ contract LOCExecutor {
                                                                     seller_addr,
                                                                     buyer_addr,
                                                                     adv_bank_addr,
+                                                                    iss_bank_addr,
                                                                     purchase_addr);
     }
 

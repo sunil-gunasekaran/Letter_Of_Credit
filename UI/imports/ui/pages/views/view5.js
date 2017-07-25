@@ -15,6 +15,7 @@ import '../../components/carrier/carrier.js';
 import '../../components/carrier/allCarriers.js';
 import '../../components/carrier/approve_shipping.js';
 import '../../components/carrier/getShippingRequests.js';
+import '../../components/carrier/shareWithSellerandBank.js';
 
 //import '../../components/admin/admin_list.js';
 
